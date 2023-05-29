@@ -1,13 +1,76 @@
-<body>
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
-    
-    <h1>My Astro Site</h1>
-    <h1>About Me</h1>
-    <h2>My name is not actually Matisse, it's Jeff.</h2>
-    
-    <p>Also, I'm working through Astro's introductory tutorial.</p>
-    
-    <p>Also, I lied. My name isn't Jeff.</p>
-</body>
+---
+import '../styles/global.css';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = "About Me";
+
+const identity = {
+    firstName: "Matisse",
+    country: "The United States",
+    hobbies: ["photography", "birdwatching", "baseball"],
+    occupation: "backend web developer",
+    employed: true,
+};
+
+const skills = ["Ruby on Rails", "SQL", "HTML", "JavaScript"];
+
+const skillColor = "Navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
+---
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{pageTitle}</title>
+        <style define:vars={{skillColor, fontWeight, textCase}}>
+            h1 {
+                color: purple;
+                font-size: 4rem;
+            }
+            .skill {
+                color: var(--skillColor);
+                font-weight: var(--fontWeight);
+                text-transform: var(--textCase);
+            }
+        </style>
+    </head>
+
+    <body>
+        <Navigation />
+
+        <h1>{pageTitle}</h1>
+        <h2>My name is not actually {identity.firstName}, it's Jeff.</h2>
+
+        <p>Also, I'm working through Astro's introductory tutorial.</p>
+
+        <p>Also, I lied. My name isn't Jeff.</p>
+
+        <p>Here are a few facts about me:</p>
+        <ul>
+            <li>My name is really {identity.firstName}.</li>
+            {
+                identity.employed && identity.occupation ? (
+                    <li>
+                        I live in {identity.country}, working as a{" "}
+                        {identity.occupation}.
+                    </li>
+                ) : (
+                    <li>
+                        I live in {identity.country}, and I'm currently open to
+                        work.
+                    </li>
+                )
+            }
+        </ul>
+        <p>Some of my skills include...</p>
+        <ul>
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
+        </ul>
+        <Footer />
+    </body>
+</html>
