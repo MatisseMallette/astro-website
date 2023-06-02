@@ -2,6 +2,10 @@
 
 A simple blog website built by following [this](https://docs.astro.build/en/tutorial/0-introduction/) tutorial.
 
+## Live site
+
+[here](https://mm-astro-site.netlify.app/)
+
 ## Installation
 
 Clone the [repo](github.com:MatisseMallette/astro-website.git).
